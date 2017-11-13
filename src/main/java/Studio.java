@@ -1,6 +1,8 @@
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_studios")
@@ -10,6 +12,8 @@ public class Studio {
     private Long pk_studio_id;
     private String headquarters;
     private Integer founded_year;
+
+    private Set<Film> films;
 
     public Studio() {
     }
@@ -21,6 +25,9 @@ public class Studio {
         this.founded_year = founded_year;
     }
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(nullable = false, unique = true)
     public Long getPk_studio_id() {
         return pk_studio_id;
     }
@@ -43,5 +50,14 @@ public class Studio {
 
     public void setFounded_year(Integer founded_year) {
         this.founded_year = founded_year;
+    }
+
+    @OneToMany(mappedBy="studio")
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Film> films) {
+        this.films = films;
     }
 }

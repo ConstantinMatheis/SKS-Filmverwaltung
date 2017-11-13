@@ -1,5 +1,9 @@
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_films")
@@ -7,7 +11,7 @@ import java.sql.Date;
 public class Film {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     // @Column(name = "id") -> um Spaltennamen zu ändern
     private Long pk_film_id;
     private Date release_year;
@@ -16,15 +20,19 @@ public class Film {
     private String language;
     private Double budget;
 
+    private Set<Actor> actors = new HashSet<Actor>(0);
+
+    private Studio studio;
+
     public Film() {}
 
-    public Film(Date release_year, String title, Integer running_time, String language, Double budget, Long fk_studio_id) {
+    public Film(Long pk_film_id, Date release_year, String title, Integer running_time, String language, Double budget) {
+        this.pk_film_id = pk_film_id;
         this.release_year = release_year;
         this.title = title;
         this.running_time = running_time;
         this.language = language;
         this.budget = budget;
-        this.fk_studio_id = fk_studio_id;
     }
 
     public String getLanguage() {
@@ -43,16 +51,9 @@ public class Film {
         this.budget = budget;
     }
 
-    public Long getFk_studio_id() {
-        return fk_studio_id;
-    }
-
-    public void setFk_studio_id(Long fk_studio_id) {
-        this.fk_studio_id = fk_studio_id;
-    }
-
-    private Long fk_studio_id;
-
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(nullable = false, unique = true)
     public Long getPk_film_id() {
         return pk_film_id;
     }
@@ -83,5 +84,30 @@ public class Film {
 
     public void setRunning_time(Integer running_time) {
         this.running_time = running_time;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = {
+                @JoinColumn(name = "fk_film_id", nullable = false, updatable = false) },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "fk_actor_id", nullable = false, updatable = false) })
+    public Set<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Set<Actor> actors) {
+        this.actors = actors;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="fk_studio_id", nullable=false)
+    public Studio getStudio() {
+        return studio;
+    }
+
+    public void setStudio(Studio studio) {
+        this.studio = studio;
     }
 }

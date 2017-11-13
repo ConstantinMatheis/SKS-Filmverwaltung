@@ -1,7 +1,9 @@
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_actor")
@@ -13,6 +15,8 @@ public class Actor {
     private String last_name;
     private Date birthday;
 
+    private Set<Film> films = new HashSet<Film>(0);
+
     public Actor() {
     }
 
@@ -23,6 +27,9 @@ public class Actor {
         this.birthday = birthday;
     }
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(nullable = false, unique = true)
     public Long getPk_actor_id() {
         return pk_actor_id;
     }
@@ -53,5 +60,14 @@ public class Actor {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "actors")
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Film> films) {
+        this.films = films;
     }
 }
