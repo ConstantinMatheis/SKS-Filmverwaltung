@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="SKS-Filmverẃaltung:war">
+  <artifact type="war" name="Filmverwaltung:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="Filmverwaltung.war">
-      <element id="artifact" artifact-name="SKS-Filmverẃaltung:war exploded" />
+      <element id="artifact" artifact-name="Filmverwaltung:war exploded" />
     </root>
   </artifact>
 </component>
