@@ -12,6 +12,9 @@ public class Studio {
     private Long pk_studio_id;
     private String headquarters;
     private Integer founded_year;
+    private String name;
+    private String countrycode;
+    private String postcode;
 
     private Set<Film> films;
 
@@ -50,6 +53,30 @@ public class Studio {
 
     public void setFounded_year(Integer founded_year) {
         this.founded_year = founded_year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountrycode() {
+        return countrycode;
+    }
+
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
     @OneToMany(mappedBy="studio")

@@ -14,6 +14,7 @@ public class Actor {
     private String first_name;
     private String last_name;
     private Date birthday;
+    private Gender gender;
 
     private Set<Film> films = new HashSet<Film>(0);
 
@@ -69,5 +70,19 @@ public class Actor {
 
     public void setFilms(Set<Film> films) {
         this.films = films;
+    }
+
+    @Enumerated(EnumType.STRING)
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public enum Gender {
+        MALE,
+        FEMALE
     }
 }

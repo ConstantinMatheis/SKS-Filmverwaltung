@@ -16,15 +16,18 @@ public class Film {
     private Long pk_film_id;
     private Date release_year;
     private String title;
+    private String description;
     private Integer running_time;
     private String language;
     private Double budget;
+    private Genre genre;
 
     private Set<Actor> actors = new HashSet<Actor>(0);
 
     private Studio studio;
 
-    public Film() {}
+    public Film() {
+    }
 
     public Film(Long pk_film_id, Date release_year, String title, Integer running_time, String language, Double budget) {
         this.pk_film_id = pk_film_id;
@@ -78,6 +81,14 @@ public class Film {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Integer getRunning_time() {
         return running_time;
     }
@@ -90,9 +101,9 @@ public class Film {
     @JoinTable(
             name = "film_actor",
             joinColumns = {
-                @JoinColumn(name = "fk_film_id", nullable = false, updatable = false) },
+                    @JoinColumn(name = "fk_film_id", nullable = false, updatable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "fk_actor_id", nullable = false, updatable = false) })
+                    @JoinColumn(name = "fk_actor_id", nullable = false, updatable = false)})
     public Set<Actor> getActors() {
         return actors;
     }
@@ -102,12 +113,25 @@ public class Film {
     }
 
     @ManyToOne
-    @JoinColumn(name="fk_studio_id", nullable=false)
+    @JoinColumn(name = "fk_studio_id", nullable = false)
     public Studio getStudio() {
         return studio;
     }
 
     public void setStudio(Studio studio) {
         this.studio = studio;
+    }
+
+    @Enumerated(EnumType.STRING)
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public enum Genre {
+        ACTION, ANIMATION, COMEDY, DRAMA, HORROR, SCIENCE_FICTION, THRILLER, WESTERN
     }
 }
