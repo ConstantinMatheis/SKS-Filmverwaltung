@@ -13,13 +13,13 @@ public class FilmService implements FilmServiceInterface {
 
     @Override
     public List<Film> getAllFilms() {
-        return em.createNamedQuery("Film.selectAll", Film.class)
+        return em.createNamedQuery("model.Film.selectAll", Film.class)
                 .getResultList();
     }
 
     @Override
     public List<Film> getFilmsByTitle(String title) {
-        return em.createNamedQuery("Film.selectByName", Film.class)
+        return em.createNamedQuery("model.Film.selectByName", Film.class)
                 .setParameter("title", title)
                 .getResultList();
     }
