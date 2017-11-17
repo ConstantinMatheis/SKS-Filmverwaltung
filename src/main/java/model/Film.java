@@ -28,7 +28,7 @@ public class Film {
     @GeneratedValue(strategy = IDENTITY)
     // @Column(name = "id") -> um Spaltennamen zu ändern
     private Long pk_film_id;
-    private Date release_year;
+    private Integer release_year;
     private String title;
     private String description;
     private Integer running_time;
@@ -43,7 +43,7 @@ public class Film {
     public Film() {
     }
 
-    public Film(Long pk_film_id, Date release_year, String title, Integer running_time, String language, Double budget) {
+    public Film(Long pk_film_id, Integer release_year, String title, Integer running_time, String language, Double budget) {
         this.pk_film_id = pk_film_id;
         this.release_year = release_year;
         this.title = title;
@@ -79,11 +79,11 @@ public class Film {
         this.pk_film_id = pk_film_id;
     }
 
-    public Date getRelease_year() {
+    public Integer getRelease_year() {
         return release_year;
     }
 
-    public void setRelease_year(Date release_year) {
+    public void setRelease_year(Integer release_year) {
         this.release_year = release_year;
     }
 
@@ -127,7 +127,7 @@ public class Film {
     }
 
     @ManyToOne
-    @JoinColumn(name = "fk_studio_id", nullable = false)
+    @JoinColumn(name = "fk_studio_id", nullable = true)
     public Studio getStudio() {
         return studio;
     }
