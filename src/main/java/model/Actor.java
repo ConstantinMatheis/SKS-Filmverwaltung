@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -65,7 +66,8 @@ public class Actor {
         this.birthday = birthday;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "actors")
+    @XmlTransient
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "actors")
     public Set<Film> getFilms() {
         return films;
     }

@@ -16,4 +16,9 @@ public class FilmWebService implements FilmWebServiceInterface {
     public List<Film> getFilmsByName(String title) {
         return filmService.getFilmsByTitle(title);
     }
+
+    @Override
+    public List<Film> getAllFilms() {
+        return filmService.getAllFilms();
+    }
 }

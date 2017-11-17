@@ -8,6 +8,8 @@ import java.util.List;
 @WebService
 public interface FilmWebServiceInterface {
 
+    List<Film> getAllFilms();
+
     List<Film> getFilmsByName(String title);
 
 }
