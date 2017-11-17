@@ -2,8 +2,6 @@ package webservice;
 
 import filmservice.FilmService;
 import model.Film;
-import webservice.FilmWebServiceInterface;
-
 import javax.inject.Inject;
 import javax.jws.WebService;
 import java.util.List;

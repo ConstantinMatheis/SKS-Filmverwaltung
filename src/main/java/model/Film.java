@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -111,7 +112,7 @@ public class Film {
         this.running_time = running_time;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "film_actor",
             joinColumns = {

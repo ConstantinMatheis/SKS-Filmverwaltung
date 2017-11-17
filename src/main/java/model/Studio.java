@@ -1,11 +1,8 @@
 package model;
 
-import model.Film;
-
 import javax.persistence.*;
-
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Set;
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -83,7 +80,8 @@ public class Studio {
         this.postcode = postcode;
     }
 
-    @OneToMany(mappedBy="studio")
+    @XmlTransient
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="studio")
     public Set<Film> getFilms() {
         return films;
     }

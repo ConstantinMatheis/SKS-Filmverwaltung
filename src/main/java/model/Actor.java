@@ -1,7 +1,5 @@
 package model;
 
-import model.Film;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;

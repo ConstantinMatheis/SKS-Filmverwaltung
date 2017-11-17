@@ -1,7 +1,6 @@
 package filmservice;
 
 import model.Film;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class FilmService implements FilmServiceInterface {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
     public List<Film> getAllFilms() {
