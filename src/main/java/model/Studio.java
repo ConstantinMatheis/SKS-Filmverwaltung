@@ -1,3 +1,7 @@
+package model;
+
+import model.Film;
+
 import javax.persistence.*;
 
 import java.util.Set;
@@ -6,7 +10,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_studios")
-@NamedQuery(name = "Studio.selectAll", query = "SELECT n FROM Studio n")
+@NamedQuery(name = "model.Studio.selectAll", query = "SELECT n FROM Studio n")
 public class Studio {
 
     private Long pk_studio_id;

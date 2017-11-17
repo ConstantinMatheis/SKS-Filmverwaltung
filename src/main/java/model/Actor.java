@@ -1,3 +1,7 @@
+package model;
+
+import model.Film;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
@@ -7,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_actor")
-@NamedQuery(name = "Actor.selectAll", query = "SELECT n FROM Actor n")
+@NamedQuery(name = "model.Actor.selectAll", query = "SELECT n FROM Actor n")
 public class Actor {
 
     private Long pk_actor_id;
