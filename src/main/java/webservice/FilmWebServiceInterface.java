@@ -12,4 +12,6 @@ public interface FilmWebServiceInterface {
 
     List<Film> getFilmsByName(String title);
 
+    Boolean importFilms(String fimXml);
+
 }

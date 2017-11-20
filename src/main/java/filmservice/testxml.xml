@@ -1,0 +1,10 @@
+
+<![CDATA[
+<film title="Test" description="adyf" genre="HORROR" length="112"
+       release_year="2017">
+    <studio name="Test" countrycode="ALHF" postcode="FKLJ"/>
+    <actors>
+        <actor first_name="Hansi" last_name="GH" gender="FEMALE" birthday="1990-08-23"/>
+        <actor first_name="AFF" last_name="GGDS" gender="MALE" birthday="1990-08-23"/>
+    </actors>
+</film>]]

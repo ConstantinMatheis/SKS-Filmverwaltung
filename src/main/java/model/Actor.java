@@ -1,22 +1,30 @@
 package model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
-import java.sql.Date;
+import javax.xml.bind.annotation.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+
 @Entity
 @Table(name = "t_actor")
 @NamedQuery(name = "model.Actor.selectAll", query = "SELECT n FROM Actor n")
+@XmlRootElement(name = "actor")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Actor {
 
+
     private Long pk_actor_id;
+    @XmlAttribute(name = "first_name")
     private String first_name;
+    @XmlAttribute(name = "last_name")
     private String last_name;
+    @XmlAttribute(name = "birthday")
     private Date birthday;
+    @XmlAttribute(name = "gender")
     private Gender gender;
 
     private Set<Film> films = new HashSet<Film>(0);

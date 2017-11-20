@@ -18,6 +18,11 @@ public class FilmWebService implements FilmWebServiceInterface {
     }
 
     @Override
+    public Boolean importFilms(String filmXml) {
+        return filmService.importFilms(filmXml);
+    }
+
+    @Override
     public List<Film> getAllFilms() {
         return filmService.getAllFilms();
     }

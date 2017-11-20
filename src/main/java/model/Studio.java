@@ -1,20 +1,27 @@
 package model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_studios")
 @NamedQuery(name = "model.Studio.selectAll", query = "SELECT n FROM Studio n")
+@XmlRootElement(name = "studio")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Studio {
 
     private Long pk_studio_id;
+    @XmlAttribute(name = "headquarters")
     private String headquarters;
+    @XmlAttribute(name = "founded_year")
     private Integer founded_year;
+    @XmlAttribute(name = "name")
     private String name;
+    @XmlAttribute(name = "countrycode")
     private String countrycode;
+    @XmlAttribute(name = "postcode")
     private String postcode;
 
     private Set<Film> films;
@@ -88,5 +95,19 @@ public class Studio {
 
     public void setFilms(Set<Film> films) {
         this.films = films;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Studio{");
+        sb.append("pk_studio_id=").append(pk_studio_id);
+        sb.append(", headquarters='").append(headquarters).append('\'');
+        sb.append(", founded_year=").append(founded_year);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", countrycode='").append(countrycode).append('\'');
+        sb.append(", postcode='").append(postcode).append('\'');
+        sb.append(", films=").append(films);
+        sb.append('}');
+        return sb.toString();
     }
 }

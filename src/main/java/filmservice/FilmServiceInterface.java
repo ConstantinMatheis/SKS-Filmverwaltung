@@ -8,4 +8,5 @@ public interface FilmServiceInterface {
 
     List<Film> getAllFilms();
     List<Film> getFilmsByTitle(String title);
+    Boolean importFilms(String fimXml);
 }
