@@ -1,15 +1,17 @@
 package filmservice;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import model.Film;
+import model.Films;
+import model.Studio;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
 import java.io.StringReader;
 import java.util.List;
 
@@ -33,23 +35,52 @@ public class FilmService implements FilmServiceInterface {
 
     @Override
     public Boolean importFilms(String filmXml) {
-        Film film = null;
+        Films films = null;
         filmXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>    " + filmXml;
         try {
-            film = getFilms(filmXml);
+            films = getFilms(filmXml);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("################# Film = " + film);
-        System.out.println("Studio = " + film.getStudio());
+        System.out.println("################# Film = " + films);
+        for(Film film : films.getFilms()) {
+            System.out.println("Studio = " + film.getStudio());
+
+            if(!filmHasActorsAndStudio(film)) {
+                return false;
+            }
+
+//            Studio studio = film.getStudio();
+
+            Long actorId = em.createNamedQuery("model.Actor.getActorKey", Long.class)
+                    .setParameter("first_name", "Ted")
+                    .setParameter("last_name", "Ericson")
+                    .getSingleResult();
+
+            Long studioId = em.createNamedQuery("model.Studio.getStudioKey", Long.class)
+                    .setParameter("name", "Berlin Works")
+                    .getSingleResult();
+
+            System.out.println("actorId: " + Long.toString(actorId));
+            System.out.println("studioId: " + Long.toString(studioId));
+
+        }
+
+
+
         return true;
     }
 
-    private Film getFilms(String filmXml) throws Exception {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Film.class);
+    private boolean filmHasActorsAndStudio(Film film) {
+        return film.getStudio() != null && !film.getActors().isEmpty();
+    }
+
+
+    private Films getFilms(String filmXml) throws Exception {
+        JAXBContext jaxbContext = JAXBContext.newInstance(Films.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         Source source = new StreamSource(new StringReader(filmXml));
-        JAXBElement<Film> jaxbElement = unmarshaller.unmarshal(source, Film.class);
+        JAXBElement<Films> jaxbElement = unmarshaller.unmarshal(source, Films.class);
         return jaxbElement.getValue();
     }
 }

@@ -11,8 +11,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_films")
-//@NamedQuery(name = "model.Film.selectAll", query = "SELECT n FROM model.Film n") // als Name kann man irgendwas nehmen
-//@NamedQuery(name = "model.Film.selectByName", query = "SELECT * FROM model.Film WHERE model.Film.Name == ") // als Name kann man irgendwas nehmen
 
 @NamedQueries({
         @NamedQuery(

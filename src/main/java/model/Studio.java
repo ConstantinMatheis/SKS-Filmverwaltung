@@ -7,7 +7,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_studios")
-@NamedQuery(name = "model.Studio.selectAll", query = "SELECT n FROM Studio n")
+
+@NamedQueries({
+        @NamedQuery(
+                name = "model.Studio.getStudioKey",
+                query = "SELECT n.pk_studio_id FROM Studio n WHERE n.name = :name "
+        ),
+        @NamedQuery(
+                name = "model.Studio.selectAll", query = "SELECT n FROM Studio n"
+        )
+})
+
+
 @XmlRootElement(name = "studio")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Studio {

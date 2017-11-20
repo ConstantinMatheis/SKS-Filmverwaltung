@@ -1,10 +1,21 @@
 
 <![CDATA[
-<film title="Test" description="adyf" genre="HORROR" length="112"
-       release_year="2017">
-    <studio name="Test" countrycode="ALHF" postcode="FKLJ"/>
-    <actors>
-        <actor first_name="Hansi" last_name="GH" gender="FEMALE" birthday="1990-08-23"/>
-        <actor first_name="AFF" last_name="GGDS" gender="MALE" birthday="1990-08-23"/>
-    </actors>
-</film>]]
+    <films>
+        <film title="Test" description="adyf" genre="HORROR" length="112"
+               release_year="2017">
+            <studio name="Test" countrycode="ALHF" postcode="FKLJ"/>
+            <actors>
+                <actor first_name="Hansi" last_name="GH" gender="FEMALE" birthday="1990-08-23"/>
+                <actor first_name="AFF" last_name="GGDS" gender="MALE" birthday="1990-08-23"/>
+            </actors>
+        </film>
+            <film title="Test2" description="sdfgdfg" genre="ACTION" length="999"
+               release_year="1998">
+            <studio name="Studiotyrol" countrycode="AUT" postcode="1020"/>
+            <actors>
+                <actor first_name="Kenny" last_name="Mac" gender="MALE" birthday="1955-08-23"/>
+                <actor first_name="Duf" last_name="Fgd" gender="FEMALE" birthday="1977-08-23"/>
+            </actors>
+        </film>
+    </films>
+]]>

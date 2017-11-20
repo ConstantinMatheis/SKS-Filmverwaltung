@@ -11,11 +11,19 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "t_actor")
+
+@NamedQueries({
+    @NamedQuery(
+        name = "model.Actor.getActorKey",
+        query = "SELECT n.pk_actor_id FROM Actor n WHERE n.last_name = :last_name " +
+                "AND n.first_name = :first_name "
+    )
+})
+
 @NamedQuery(name = "model.Actor.selectAll", query = "SELECT n FROM Actor n")
 @XmlRootElement(name = "actor")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Actor {
-
 
     private Long pk_actor_id;
     @XmlAttribute(name = "first_name")
