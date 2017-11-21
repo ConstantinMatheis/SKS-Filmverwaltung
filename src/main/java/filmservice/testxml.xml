@@ -1,20 +1,20 @@
 
 <![CDATA[
     <films>
-        <film title="Test" description="adyf" genre="HORROR" length="112"
+        <film title="ASDF" description="adyf" genre="HORROR" length="112"
                release_year="2017">
-            <studio name="Test" countrycode="ALHF" postcode="FKLJ"/>
+            <studio name="Berlin Works" countrycode="DE" postcode="4565"/>
             <actors>
-                <actor first_name="Hansi" last_name="GH" gender="FEMALE" birthday="1990-08-23"/>
-                <actor first_name="AFF" last_name="GGDS" gender="MALE" birthday="1990-08-23"/>
+                <actor first_name="Anna" last_name="Grumb" gender="FEMALE" birthday="1990-08-23"/>
+                <actor first_name="Mia" last_name="Trump" gender="FEMALE" birthday="1990-08-23"/>
             </actors>
         </film>
-            <film title="Test2" description="sdfgdfg" genre="ACTION" length="999"
+            <film title="JKLÖ" description="best movie" genre="ACTION" length="999"
                release_year="1998">
-            <studio name="Studiotyrol" countrycode="AUT" postcode="1020"/>
+            <studio name="Bregenz Pro Studios" countrycode="AU" postcode="6532"/>
             <actors>
-                <actor first_name="Kenny" last_name="Mac" gender="MALE" birthday="1955-08-23"/>
-                <actor first_name="Duf" last_name="Fgd" gender="FEMALE" birthday="1977-08-23"/>
+                <actor first_name="Ted" last_name="Ericson" gender="MALE" birthday="1955-08-23"/>
+                <actor first_name="Jack" last_name="Buttle" gender="MALE" birthday="1977-08-23"/>
             </actors>
         </film>
     </films>

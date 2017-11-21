@@ -1,12 +1,12 @@
 package filmservice;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import model.Actor;
 import model.Film;
 import model.Films;
 import model.Studio;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.xml.bind.JAXBContext;
@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 
 public class FilmService implements FilmServiceInterface {
-
 
     @PersistenceContext
     private EntityManager em;
@@ -41,62 +40,63 @@ public class FilmService implements FilmServiceInterface {
     @Transactional
     @Override
     public Boolean importFilms(String filmXml) {
-        Films films = null;
-        filmXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>    " + filmXml;
         try {
-            films = getFilms(filmXml);
+            Films xmlFilms = getFilmsFromXml(filmXml);
+            persistFilms(xmlFilms);
+        } catch (RuntimeException e) {
+            System.err.println(e.getMessage());
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        System.out.println("################# Film = " + films);
-        for(Film film : films.getFilms()) {
-            System.out.println("Studio = " + film.getStudio());
 
-//            if(!filmHasActorsAndStudio(film)) {
-//                return false;
-//            }
-
-            Set<Actor> dbActors = new HashSet<>();
-            for(Actor xmlActor : film.getActors()) {
-                Actor dbActor = em.createNamedQuery("model.Actor.selectByName", Actor.class)
-                        .setParameter("last_name", xmlActor.getLast_name())
-                        .setParameter("first_name", xmlActor.getFirst_name())
-                        .getSingleResult();
-                if(dbActor == null) {
-                    throw new RuntimeException("Actor not found!");
-                }
-                dbActors.add(dbActor);
-
-            }
-            Studio studio = em.createNamedQuery("model.Studio.selectByName", Studio.class)
-                        .setParameter("name", film.getStudio().getName())
-                        .getSingleResult();
-            if(studio == null) {
-                throw new RuntimeException("Studio not found!");
-            }
-            film.setActors(dbActors);
-            film.setStudio(studio);
-
-//            em.persist(studio);
-//            em.getTransaction().begin();
-            em.persist(film);
-//            em.getTransaction().commit();
-
-        }
-
+        System.out.println("Successfully imported movie(s).");
         return true;
     }
 
-//    private boolean filmHasActorsAndStudio(Film film) {
-//        return film.getStudio() != null && !film.getActors().isEmpty();
-//    }
-
-
-    private Films getFilms(String filmXml) throws Exception {
+    private Films getFilmsFromXml(String filmXml) throws Exception {
         JAXBContext jaxbContext = JAXBContext.newInstance(Films.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         Source source = new StreamSource(new StringReader(filmXml));
         JAXBElement<Films> jaxbElement = unmarshaller.unmarshal(source, Films.class);
         return jaxbElement.getValue();
+    }
+
+    private void persistFilms(Films xmlFilms) {
+        for (Film xmlFilm : xmlFilms.getFilms()) {
+            xmlFilm.setActors(getDbActors(xmlFilm));
+            xmlFilm.setStudio(getDbStudio(xmlFilm));
+            em.persist(xmlFilm);
+        }
+    }
+
+    private Set<Actor> getDbActors(Film film) {
+        Set<Actor> dbActors = new HashSet<>();
+        for (Actor xmlActor : film.getActors()) {
+            Actor dbActor = getDbActorFromXml(xmlActor);
+            dbActors.add(dbActor);
+        }
+        return dbActors;
+    }
+
+    private Actor getDbActorFromXml(Actor xmlActor) {
+        try {
+            return em.createNamedQuery("model.Actor.selectByName", Actor.class)
+                    .setParameter("last_name", xmlActor.getLast_name())
+                    .setParameter("first_name", xmlActor.getFirst_name())
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            throw new NoResultException("Actor '" + xmlActor.getFirst_name() + " " + xmlActor.getLast_name() + "' not found!");
+        }
+    }
+
+    private Studio getDbStudio(Film film) {
+        try {
+            return em.createNamedQuery("model.Studio.selectByName", Studio.class)
+                    .setParameter("name", film.getStudio().getName())
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            throw new NoResultException("Studio '" + film.getStudio().getName() + "' not found!");
+        }
     }
 }
