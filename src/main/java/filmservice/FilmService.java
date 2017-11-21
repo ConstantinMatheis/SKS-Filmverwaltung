@@ -1,21 +1,26 @@
 package filmservice;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import model.Actor;
 import model.Film;
 import model.Films;
 import model.Studio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.StringReader;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FilmService implements FilmServiceInterface {
+
 
     @PersistenceContext
     private EntityManager em;
@@ -33,6 +38,7 @@ public class FilmService implements FilmServiceInterface {
                 .getResultList();
     }
 
+    @Transactional
     @Override
     public Boolean importFilms(String filmXml) {
         Films films = null;
@@ -42,38 +48,48 @@ public class FilmService implements FilmServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("################# Film = " + films);
+//        System.out.println("################# Film = " + films);
         for(Film film : films.getFilms()) {
             System.out.println("Studio = " + film.getStudio());
 
-            if(!filmHasActorsAndStudio(film)) {
-                return false;
+//            if(!filmHasActorsAndStudio(film)) {
+//                return false;
+//            }
+
+            Set<Actor> dbActors = new HashSet<>();
+            for(Actor xmlActor : film.getActors()) {
+                Actor dbActor = em.createNamedQuery("model.Actor.selectByName", Actor.class)
+                        .setParameter("last_name", xmlActor.getLast_name())
+                        .setParameter("first_name", xmlActor.getFirst_name())
+                        .getSingleResult();
+                if(dbActor == null) {
+                    throw new RuntimeException("Actor not found!");
+                }
+                dbActors.add(dbActor);
+
             }
+            Studio studio = em.createNamedQuery("model.Studio.selectByName", Studio.class)
+                        .setParameter("name", film.getStudio().getName())
+                        .getSingleResult();
+            if(studio == null) {
+                throw new RuntimeException("Studio not found!");
+            }
+            film.setActors(dbActors);
+            film.setStudio(studio);
 
-//            Studio studio = film.getStudio();
-
-            Long actorId = em.createNamedQuery("model.Actor.getActorKey", Long.class)
-                    .setParameter("first_name", "Ted")
-                    .setParameter("last_name", "Ericson")
-                    .getSingleResult();
-
-            Long studioId = em.createNamedQuery("model.Studio.getStudioKey", Long.class)
-                    .setParameter("name", "Berlin Works")
-                    .getSingleResult();
-
-            System.out.println("actorId: " + Long.toString(actorId));
-            System.out.println("studioId: " + Long.toString(studioId));
+//            em.persist(studio);
+//            em.getTransaction().begin();
+            em.persist(film);
+//            em.getTransaction().commit();
 
         }
-
-
 
         return true;
     }
 
-    private boolean filmHasActorsAndStudio(Film film) {
-        return film.getStudio() != null && !film.getActors().isEmpty();
-    }
+//    private boolean filmHasActorsAndStudio(Film film) {
+//        return film.getStudio() != null && !film.getActors().isEmpty();
+//    }
 
 
     private Films getFilms(String filmXml) throws Exception {

@@ -10,11 +10,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @NamedQueries({
         @NamedQuery(
-                name = "model.Studio.getStudioKey",
-                query = "SELECT n.pk_studio_id FROM Studio n WHERE n.name = :name "
+                name = "model.Studio.selectByName",
+                query = "SELECT n FROM Studio n WHERE n.name = :name "
         ),
         @NamedQuery(
-                name = "model.Studio.selectAll", query = "SELECT n FROM Studio n"
+                name = "model.Studio.selectAll",
+                query = "SELECT n FROM Studio n"
         )
 })
 

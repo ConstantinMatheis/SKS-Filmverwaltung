@@ -14,8 +14,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @NamedQueries({
     @NamedQuery(
-        name = "model.Actor.getActorKey",
-        query = "SELECT n.pk_actor_id FROM Actor n WHERE n.last_name = :last_name " +
+        name = "model.Actor.selectByName",
+        query = "SELECT n FROM Actor n WHERE n.last_name = :last_name " +
                 "AND n.first_name = :first_name "
     )
 })

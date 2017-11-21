@@ -19,7 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
         ),
         @NamedQuery(
                 name = "model.Film.selectByName",
-                query = "FROM Film film WHERE film.title LIKE CONCAT('%', :title, '%')"
+                query = "SELECT film FROM Film film WHERE film.title LIKE CONCAT('%', :title, '%')"
         )
 })
 @XmlRootElement(name = "film")
