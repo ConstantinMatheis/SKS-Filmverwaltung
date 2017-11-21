@@ -34,7 +34,7 @@ public class Actor {
     private Date birthday;
     @XmlAttribute(name = "gender")
     private Gender gender;
-
+    @XmlTransient
     private Set<Film> films = new HashSet<Film>(0);
 
     public Actor() {

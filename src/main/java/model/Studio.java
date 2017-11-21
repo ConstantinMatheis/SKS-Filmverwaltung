@@ -34,7 +34,7 @@ public class Studio {
     private String countrycode;
     @XmlAttribute(name = "postcode")
     private String postcode;
-
+    @XmlTransient
     private Set<Film> films;
 
     public Studio() {
@@ -108,17 +108,17 @@ public class Studio {
         this.films = films;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Studio{");
-        sb.append("pk_studio_id=").append(pk_studio_id);
-        sb.append(", headquarters='").append(headquarters).append('\'');
-        sb.append(", founded_year=").append(founded_year);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", countrycode='").append(countrycode).append('\'');
-        sb.append(", postcode='").append(postcode).append('\'');
-        sb.append(", films=").append(films);
-        sb.append('}');
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        final StringBuffer sb = new StringBuffer("Studio{");
+//        sb.append("pk_studio_id=").append(pk_studio_id);
+//        sb.append(", headquarters='").append(headquarters).append('\'');
+//        sb.append(", founded_year=").append(founded_year);
+//        sb.append(", name='").append(name).append('\'');
+//        sb.append(", countrycode='").append(countrycode).append('\'');
+//        sb.append(", postcode='").append(postcode).append('\'');
+//        sb.append(", films=").append(films);
+//        sb.append('}');
+//        return sb.toString();
+//    }
 }

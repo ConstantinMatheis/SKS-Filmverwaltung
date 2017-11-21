@@ -160,20 +160,20 @@ public class Film {
         ACTION, ANIMATION, COMEDY, DRAMA, HORROR, SCIENCE_FICTION, THRILLER, WESTERN
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Film{");
-        sb.append("pk_film_id=").append(pk_film_id);
-        sb.append(", release_year=").append(release_year);
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", running_time=").append(running_time);
-        sb.append(", language='").append(language).append('\'');
-        sb.append(", budget=").append(budget);
-        sb.append(", genre=").append(genre);
-        sb.append(", actors=").append(actors);
-        sb.append(", studio=").append(studio);
-        sb.append('}');
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        final StringBuffer sb = new StringBuffer("Film{");
+//        sb.append("pk_film_id=").append(pk_film_id);
+//        sb.append(", release_year=").append(release_year);
+//        sb.append(", title='").append(title).append('\'');
+//        sb.append(", description='").append(description).append('\'');
+//        sb.append(", running_time=").append(running_time);
+//        sb.append(", language='").append(language).append('\'');
+//        sb.append(", budget=").append(budget);
+//        sb.append(", genre=").append(genre);
+//        sb.append(", actors=").append(actors);
+//        sb.append(", studio=").append(studio);
+//        sb.append('}');
+//        return sb.toString();
+//    }
 }
