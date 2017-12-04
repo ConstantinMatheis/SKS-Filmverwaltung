@@ -1,9 +1,7 @@
 package rest;
 
-import actorservice.ActorService;
 import model.Studio;
-import model.Studio;
-import studioservice.StudioService;
+import service.StudioService;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

@@ -1,6 +1,6 @@
 package rest;
 
-import actorservice.ActorService;
+import service.ActorService;
 import model.Actor;
 
 import javax.inject.Inject;

@@ -1,6 +1,6 @@
 package webservice;
 
-import filmservice.FilmService;
+import service.FilmService;
 import model.Film;
 import javax.inject.Inject;
 import javax.jws.WebService;

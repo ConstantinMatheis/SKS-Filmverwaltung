@@ -1,4 +1,4 @@
-package studioservice;
+package service;
 
 import model.Actor;
 import model.Studio;

@@ -1,4 +1,4 @@
-package filmservice;
+package service;
 
 import model.Actor;
 import model.Film;

@@ -1,6 +1,7 @@
-package actorservice;
+package service;
 
 import model.Actor;
+import service.ActorServiceInterface;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,4 +1,4 @@
-package actorservice;
+package service;
 
 import model.Actor;
 
