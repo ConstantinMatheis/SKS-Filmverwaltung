@@ -29,7 +29,7 @@ public class StudioResource {
     private StudioService studioService;
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     public Response create(Studio studio) {
         em.persist(studio);
         URI uri = uriInfo.getAbsolutePathBuilder()
@@ -61,7 +61,7 @@ public class StudioResource {
 
     @PUT
     @Path("/{pk_studio_id}")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void update(@PathParam("pk_studio_id") Long pk_studio_id, Studio studio) {
         Studio studioOld = em.find(Studio.class, pk_studio_id);
         if(studioOld != null) {

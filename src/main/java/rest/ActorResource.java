@@ -27,7 +27,7 @@ public class ActorResource {
     private ActorService actorService;
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     public Response create(Actor actor) {
         em.persist(actor);
         URI uri = uriInfo.getAbsolutePathBuilder()
@@ -59,7 +59,7 @@ public class ActorResource {
 
     @PUT
     @Path("/{setPk_actor_id}")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void update(@PathParam("setPk_actor_id") Long setPk_actor_id, Actor actor) {
         Actor actorOld = em.find(Actor.class, setPk_actor_id);
         if(actorOld != null) {
