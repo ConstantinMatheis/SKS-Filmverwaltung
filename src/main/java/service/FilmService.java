@@ -7,6 +7,7 @@ import model.Studio;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import javax.annotation.Resource;
+import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -25,19 +26,21 @@ import java.util.List;
 import java.util.Set;
 
 @SecurityDomain("FilmManagementSD")
-@RolesAllowed({"MSRead", "MSWrite"})
+@DeclareRoles({"MSRead", "MSWrite"})
 public class FilmService implements FilmServiceInterface {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
+    @RolesAllowed({"MSRead", "MSWrite"})
     public List<Film> getAllFilms() {
         return em.createNamedQuery("model.Film.selectAll", Film.class)
                 .getResultList();
     }
 
     @Override
+    @RolesAllowed({"MSRead", "MSWrite"})
     public List<Film> getFilmsByTitle(String title) {
         return em.createNamedQuery("model.Film.selectByName", Film.class)
                 .setParameter("title", title)
@@ -46,6 +49,7 @@ public class FilmService implements FilmServiceInterface {
 
     @Transactional
     @Override
+    @RolesAllowed("MSWrite")
     public Boolean importFilms(String filmXml) {
         try {
             Films xmlFilms = getFilmsFromXml(filmXml);

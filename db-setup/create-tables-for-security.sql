@@ -26,10 +26,13 @@ CREATE TABLE t_user_role (
 
 INSERT INTO t_user (userid, username, password) VALUES (1, 'reader', encode(digest('123', 'sha512'), 'hex'));
 INSERT INTO t_user (userid, username, password) VALUES (2, 'writer', encode(digest('123', 'sha512'), 'hex'));
+INSERT INTO t_user (userid, username, password) VALUES (3, 'other', encode(digest('123', 'sha512'), 'hex'));
 
 INSERT INTO t_role (roleid, rolename) VALUES (1, 'MSRead');
 INSERT INTO t_role (roleid, rolename) VALUES (2, 'MSWrite');
+INSERT INTO t_role (roleid, rolename) VALUES (3, 'MSOther');
 
 INSERT INTO t_user_role (userid, roleid) VALUES (1, 1);
 INSERT INTO t_user_role (userid, roleid) VALUES (2, 2);
 INSERT INTO t_user_role (userid, roleid) VALUES (2, 1);
+INSERT INTO t_user_role (userid, roleid) VALUES (3, 3);

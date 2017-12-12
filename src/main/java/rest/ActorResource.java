@@ -1,8 +1,11 @@
 package rest;
 
+import org.jboss.ejb3.annotation.SecurityDomain;
 import service.ActorService;
 import model.Actor;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.util.List;
 
+@SecurityDomain("FilmManagementSD")
+@DeclareRoles({"MSRead", "MSWrite"})
 @XmlRootElement
 @Path("/actors")
 @Transactional
@@ -28,6 +33,7 @@ public class ActorResource {
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
+    @RolesAllowed("MSWrite")
     public Response create(Actor actor) {
         em.persist(actor);
         URI uri = uriInfo.getAbsolutePathBuilder()
@@ -39,6 +45,7 @@ public class ActorResource {
     @GET
     @Path("/{setPk_actor_id}")
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"MSRead", "MSWrite"})
     public Actor retrieveAsJSONXML(@PathParam("setPk_actor_id") Long setPk_actor_id) {
         return em.find(Actor.class, setPk_actor_id);
     }
@@ -46,6 +53,7 @@ public class ActorResource {
     @GET
     @Path("/{setPk_actor_id}")
     @Produces(MediaType.TEXT_PLAIN)
+    @RolesAllowed({"MSRead", "MSWrite"})
     public String retrieveAsString(@PathParam("setPk_actor_id") Long setPk_actor_id) {
         Actor actor = em.find(Actor.class, setPk_actor_id);
         return (actor != null ? actor.toString() : null);
@@ -53,6 +61,7 @@ public class ActorResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"MSRead", "MSWrite"})
     public List<Actor> getAll() {
         return actorService.getAllActors();
     }
@@ -60,6 +69,7 @@ public class ActorResource {
     @PUT
     @Path("/{setPk_actor_id}")
     @Consumes({MediaType.APPLICATION_JSON})
+    @RolesAllowed("MSWrite")
     public void update(@PathParam("setPk_actor_id") Long setPk_actor_id, Actor actor) {
         Actor actorOld = em.find(Actor.class, setPk_actor_id);
         if(actorOld != null) {
@@ -76,6 +86,7 @@ public class ActorResource {
     // if the actor is referenced in film_actor table - it will not be deleted (probably feature and not a bug)
     @DELETE
     @Path("/{setPk_actor_id}")
+    @RolesAllowed("MSWrite")
     public void delete(@PathParam("setPk_actor_id") Long setPk_actor_id) {
         Actor actor = em.find(Actor.class, setPk_actor_id);
         if(actor != null) {

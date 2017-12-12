@@ -1,8 +1,11 @@
 package rest;
 
 import model.Studio;
+import org.jboss.ejb3.annotation.SecurityDomain;
 import service.StudioService;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.util.List;
 
+@SecurityDomain("FilmManagementSD")
+@DeclareRoles({"MSRead", "MSWrite"})
 @XmlRootElement
 @Path("/studios")
 @Transactional
@@ -28,6 +33,7 @@ public class StudioResource {
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
+    @RolesAllowed("MSWrite")
     public Response create(Studio studio) {
         em.persist(studio);
         URI uri = uriInfo.getAbsolutePathBuilder()
@@ -39,6 +45,7 @@ public class StudioResource {
     @GET
     @Path("/{pk_studio_id}")
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"MSRead", "MSWrite"})
     public Studio retrieveAsJSONXML(@PathParam("pk_studio_id") Long pk_studio_id) {
         return em.find(Studio.class, pk_studio_id);
     }
@@ -46,6 +53,7 @@ public class StudioResource {
     @GET
     @Path("/{pk_studio_id}")
     @Produces(MediaType.TEXT_PLAIN)
+    @RolesAllowed({"MSRead", "MSWrite"})
     public String retrieveAsString(@PathParam("pk_studio_id") Long pk_studio_id) {
         Studio studio = em.find(Studio.class, pk_studio_id);
         return (studio != null ? studio.toString() : null);
@@ -53,6 +61,7 @@ public class StudioResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"MSRead", "MSWrite"})
     public List<Studio> getAll() {
         return studioService.getAllStudios();
     }
@@ -60,6 +69,7 @@ public class StudioResource {
     @PUT
     @Path("/{pk_studio_id}")
     @Consumes({MediaType.APPLICATION_JSON})
+    @RolesAllowed("MSWrite")
     public void update(@PathParam("pk_studio_id") Long pk_studio_id, Studio studio) {
         Studio studioOld = em.find(Studio.class, pk_studio_id);
         if(studioOld != null) {
@@ -76,6 +86,7 @@ public class StudioResource {
 
     @DELETE
     @Path("/{pk_studio_id}")
+    @RolesAllowed("MSWrite")
     public void delete(@PathParam("pk_studio_id") Long pk_studio_id) {
         Studio studio = em.find(Studio.class, pk_studio_id);
         if(studio != null) {
