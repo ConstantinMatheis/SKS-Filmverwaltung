@@ -15,6 +15,7 @@ public class ResponseFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext containerRequestContext, ContainerResponseContext containerResponseContext) throws IOException {
         MultivaluedMap<String, Object> headers = containerResponseContext.getHeaders();
         headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Headers","Authorization");
         headers.add("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, POST, PUT");
 
         CacheControl cacheControl = new CacheControl();

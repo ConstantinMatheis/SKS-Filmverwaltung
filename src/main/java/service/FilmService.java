@@ -4,7 +4,11 @@ import model.Actor;
 import model.Film;
 import model.Films;
 import model.Studio;
+import org.jboss.ejb3.annotation.SecurityDomain;
 
+import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.SessionContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -19,6 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@SecurityDomain("FilmManagementSD")
+@RolesAllowed({"MSRead", "MSWrite"})
 public class FilmService implements FilmServiceInterface {
 
     @PersistenceContext

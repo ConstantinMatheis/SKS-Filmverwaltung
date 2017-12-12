@@ -1,12 +1,16 @@
 package service;
 
 import model.Actor;
+import org.jboss.ejb3.annotation.SecurityDomain;
 import service.ActorServiceInterface;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@SecurityDomain("FilmManagementSD")
+@RolesAllowed({"MSRead", "MSWrite"})
 public class ActorService implements ActorServiceInterface {
 
     @PersistenceContext
