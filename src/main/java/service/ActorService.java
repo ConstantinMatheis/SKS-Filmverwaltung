@@ -5,6 +5,7 @@ import org.jboss.ejb3.annotation.SecurityDomain;
 import service.ActorServiceInterface;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
