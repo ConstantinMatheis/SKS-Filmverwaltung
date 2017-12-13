@@ -8,6 +8,7 @@ import org.jboss.ejb3.annotation.SecurityDomain;
 
 import javax.annotation.Resource;
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -25,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Stateless
 @SecurityDomain("FilmManagementSD")
 @DeclareRoles({"MSRead", "MSWrite"})
 public class FilmService implements FilmServiceInterface {

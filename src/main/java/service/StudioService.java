@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Stateless
 @SecurityDomain("FilmManagementSD")
 @DeclareRoles({"MSRead", "MSWrite"})
 public class StudioService implements StudioServiceInterface {

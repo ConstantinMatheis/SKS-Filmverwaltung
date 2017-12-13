@@ -3,9 +3,14 @@ package rest;
 import org.jboss.ejb3.annotation.SecurityDomain;
 import service.ActorService;
 import model.Actor;
+import service.ActorServiceInterface;
 
+import javax.annotation.Resource;
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.SessionContext;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,14 +19,19 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
+import java.util.logging.Logger;
 
+@Stateless
 @SecurityDomain("FilmManagementSD")
 @DeclareRoles({"MSRead", "MSWrite"})
 @XmlRootElement
 @Path("/actors")
 @Transactional
 public class ActorResource {
+    private final static Logger LOGGER = Logger.getLogger("ActorResource");
+
     @PersistenceContext
     private EntityManager em;
 
@@ -29,7 +39,7 @@ public class ActorResource {
     private UriInfo uriInfo;
 
     @Inject
-    private ActorService actorService;
+    private ActorServiceInterface actorService;
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})

@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Stateless
 @SecurityDomain("FilmManagementSD")
 @RolesAllowed({"MSRead", "MSWrite"})
 public class ActorService implements ActorServiceInterface {

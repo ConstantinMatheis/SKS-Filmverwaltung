@@ -2,6 +2,8 @@ package webservice;
 
 import service.FilmService;
 import model.Film;
+import service.FilmServiceInterface;
+
 import javax.inject.Inject;
 import javax.jws.WebService;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 public class FilmWebService implements FilmWebServiceInterface {
 
     @Inject
-    private FilmService filmService;
+    private FilmServiceInterface filmService;
 
     @Override
     public List<Film> getFilmsByName(String title) {

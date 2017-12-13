@@ -3,9 +3,12 @@ package rest;
 import model.Studio;
 import org.jboss.ejb3.annotation.SecurityDomain;
 import service.StudioService;
+import service.StudioServiceInterface;
 
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.util.List;
 
+@Stateless
 @SecurityDomain("FilmManagementSD")
 @DeclareRoles({"MSRead", "MSWrite"})
 @XmlRootElement
@@ -29,7 +33,7 @@ public class StudioResource {
     private UriInfo uriInfo;
 
     @Inject
-    private StudioService studioService;
+    private StudioServiceInterface studioService;
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
