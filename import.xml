@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<movies>
+    <movie title="Hercules in New York" description="adsf" genre="COMEDY" length="117" releaseyear="1998">
+        <studio name="Berlin Works" countrycode="DE" postcode="4565"/>
+        <actors>
+            <actor firstname="Anna" lastname="Grumb" sex="FEMALE" birthdate="1990-08-23"/>
+        </actors>
+    </movie>
+    <movie title="ttttt" description="adsf" genre="COMEDY" length="117" releaseyear="1998">
+        <studio name="imaginary studio" countrycode="DE" postcode="4565"/>
+        <actors>
+            <actor firstname="Anna" lastname="Grumb" sex="FEMALE" birthdate="1990-08-23"/>
+        </actors>
+    </movie>
+    <movie title="bbbbbb" description="adsf" genre="COMEDY" length="117" releaseyear="1998">
+        <studio name="Berlin Works" countrycode="DE" postcode="4565"/>
+        <actors>
+            <actor firstname="Anna" lastname="Grumb" sex="FEMALE" birthdate="1990-08-23"/>
+        </actors>
+    </movie>
+</movies>

@@ -3,11 +3,11 @@ package model;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
-@XmlRootElement(name = "films")
+@XmlRootElement(name = "movies")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Films {
 
-    @XmlElement(name = "film")
+    @XmlElement(name = "movie")
     private List<Film> films;
 
     public Films() { }

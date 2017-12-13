@@ -21,6 +21,7 @@ public class FilmWebService implements FilmWebServiceInterface {
 
     @Override
     public Boolean importFilms(String filmXml) {
+        filmXml = filmXml.replaceAll("\\<\\?xml(.+?)\\?\\>", "").trim();
         return filmService.importFilms(filmXml);
     }
 

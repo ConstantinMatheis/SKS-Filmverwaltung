@@ -26,13 +26,13 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Actor {
 
     private Long pk_actor_id;
-    @XmlAttribute(name = "first_name")
+    @XmlAttribute(name = "firstname")
     private String first_name;
-    @XmlAttribute(name = "last_name")
+    @XmlAttribute(name = "lastname")
     private String last_name;
-    @XmlAttribute(name = "birthday")
+    @XmlAttribute(name = "birthdate")
     private Date birthday;
-    @XmlAttribute(name = "gender")
+    @XmlAttribute(name = "sex")
     private Gender gender;
     @XmlTransient
     private Set<Film> films = new HashSet<Film>(0);

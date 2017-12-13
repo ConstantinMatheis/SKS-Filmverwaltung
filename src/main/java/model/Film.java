@@ -22,7 +22,7 @@ import static javax.persistence.GenerationType.IDENTITY;
                 query = "SELECT film FROM Film film WHERE film.title LIKE CONCAT('%', :title, '%')"
         )
 })
-@XmlRootElement(name = "film")
+@XmlRootElement(name = "movie")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Film {
 
@@ -30,13 +30,13 @@ public class Film {
     @GeneratedValue(strategy = IDENTITY)
     // @Column(name = "id") -> um Spaltennamen zu ändern
     private Long pk_film_id;
-    @XmlAttribute(name = "release_year")
+    @XmlAttribute(name = "releaseyear")
     private Integer release_year;
     @XmlAttribute(name = "title")
     private String title;
     @XmlAttribute(name = "description")
     private String description;
-    @XmlAttribute(name = "running_time")
+    @XmlAttribute(name = "length")
     private Integer running_time;
     @XmlAttribute(name = "language")
     private String language;
